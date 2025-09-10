@@ -40,10 +40,10 @@ void editarContacto(Contacto *c) {
                 leerLineaEdit(c->correo, sizeof(c->correo), "Nuevo correo: ");
                 break;
             case 0:
-                printf("Saliendo de edición...\n");
+                printf("Saliendo de edicion...\n");
                 break;
             default:
-                printf("Opción inválida.\n");
+                printf("Opción invalida.\n");
         }
     } while(opcion != 0);
 
