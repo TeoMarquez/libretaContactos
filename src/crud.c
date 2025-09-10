@@ -46,18 +46,75 @@ void borrarContacto(Contacto *lista, int *total, int idx) {
 }
 
 void buscarContacto(Contacto *lista, int total, const char *dato) {
-    printf("Resultados de busqueda para \"%s\":\n", dato);
+    int indices[100]; 
+    int encontrados = 0;
+
+    printf("\nResultados de busqueda para \"%s\":\n", dato);
+
     for (int i = 0; i < total; i++) {
         if (strstr(lista[i].nombre, dato) ||
             strstr(lista[i].dni, dato) ||
             strstr(lista[i].telefono, dato) ||
             strstr(lista[i].correo, dato)) {
+
             printf("%d) %s | %s | %s | %s\n",
-                   i + 1,
+                   encontrados + 1,
                    lista[i].nombre,
                    lista[i].dni,
                    lista[i].telefono,
                    lista[i].correo);
+
+            indices[encontrados] = i; 
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("No se encontraron contactos.\n");
+        return;
+    }
+
+    char opcion[10];
+    while (1) {
+        printf("\nSeleccione un contacto por numero (0 para volver): ");
+        leerLinea(opcion, sizeof(opcion), "");
+
+        int sel = atoi(opcion);
+        if (sel == 0) return; 
+        if (sel < 1 || sel > encontrados) {
+            printf("Opcion invalida.\n");
+            continue;
+        }
+
+        int idx = indices[sel - 1]; // índice real del contacto
+
+        printf("Seleccione accion: 1=Ver, 2=Editar, 0=Volver: ");
+        leerLinea(opcion, sizeof(opcion), "");
+        int act = atoi(opcion);
+
+        switch (act) {
+            case 0:
+                break; 
+            case 1:
+                mostrarContacto(&lista[idx]);
+                esperarTecla();
+                break;
+            case 2:
+                editarContacto(&lista[idx]);
+                break;
+            default:
+                printf("Opcion invalida.\n");
+        }
+
+        printf("\nResultados de busqueda para \"%s\":\n", dato);
+        for (int j = 0; j < encontrados; j++) {
+            int real = indices[j];
+            printf("%d) %s | %s | %s | %s\n",
+                   j + 1,
+                   lista[real].nombre,
+                   lista[real].dni,
+                   lista[real].telefono,
+                   lista[real].correo);
         }
     }
 }
