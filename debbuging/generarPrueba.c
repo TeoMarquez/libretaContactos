@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "contacto.h"
-#include "crud.h" // Para usar guardarContactos()
+#include "crud.h" 
 
 int main() {
     int total = 35;

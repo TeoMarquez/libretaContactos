@@ -3,10 +3,10 @@
 #include <string.h>
 #include <time.h>
 #include "contacto.h"
-#include "crud.h" // Para usar guardarContactos()
+#include "crud.h" 
 
 int main() {
-    srand(time(NULL)); // inicializar generador aleatorio
+    srand(time(NULL)); 
 
     int total = 35;
     Contacto *contactos = malloc(sizeof(Contacto) * total);
@@ -19,12 +19,12 @@ int main() {
     int baseCount = sizeof(nombresBase) / sizeof(nombresBase[0]);
 
     for (int i = 0; i < total; i++) {
-        // Elegir nombre base aleatorio
+       
         const char *base = nombresBase[rand() % baseCount];
 
-        // A veces agregamos un número al final (50% de probabilidad)
+       
         if (rand() % 2 == 0) {
-            int num = rand() % 20 + 1; // número del 1 al 20
+            int num = rand() % 20 + 1; 
             snprintf(contactos[i].nombre, sizeof(contactos[i].nombre), "%s%d", base, num);
         } else {
             snprintf(contactos[i].nombre, sizeof(contactos[i].nombre), "%s", base);
