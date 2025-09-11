@@ -50,6 +50,7 @@ int main() {
         printf(" B -n = borrar contacto n\n");
         printf(" Ver -n = ver detalle contacto n\n");
         printf(" Busq -dato = buscar por dato\n");
+        printf(" O = Organizar contactos\n");
         printf(" q = salir\n");
 
         leerLinea(comando, sizeof(comando), "> ");
@@ -93,6 +94,8 @@ int main() {
             esperarTecla();
         } else if (strcmp(comando, "q") == 0) {
             printf("Saliendo...\n");
+        } else if (strcmp(comando, "O") == 0 || strcmp(comando, "o") == 0) {
+            organizarContactos(contactos, total);
         } else {
             printf("Comando no reconocido.\n");
         }
